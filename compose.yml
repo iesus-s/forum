@@ -1,7 +1,7 @@
 services:
   # Apache and PHP service
   web:
-    image: php:7.4-apache
+    image: php:8.0-apache
     container_name: php-apache-container
     ports:
       - "8080:80"
@@ -38,22 +38,7 @@ services:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: 32-117-kill3rb33
     depends_on:
-      - mysql
-
-  # Nginx service
-  nginx:
-    image: nginx:latest
-    container_name: nginx-container
-    ports:
-      - "80:80"     # HTTP
-      - "443:443"   # HTTPS
-    volumes:
-      - ./nginx/conf:/etc/nginx/conf:ro
-      - ./nginx/certs:/etc/nginx/certs:ro
-    networks:
-      - app-network
-    depends_on:
-      - web
+      - mysql 
 
 # Define networks
 networks:
