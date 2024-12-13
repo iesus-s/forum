@@ -1,0 +1,46 @@
+services:
+  # Apache and PHP service
+  web:
+    image: php:7.4-apache
+    container_name: php-apache-container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./snake:/var/www/html
+    networks:
+      - app-network
+
+  # MySQL service
+  mysql:
+    image: mysql:latest
+    networks:
+      - app-network
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: the_database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes: 
+      - ./snake/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # phpMyAdmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - app-network
+    container_name: phpmyadmin-container
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: password
+    depends_on:
+      - mysql
+
+# Define networks
+networks:
+  app-network:
+    driver: bridge
