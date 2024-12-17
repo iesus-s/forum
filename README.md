@@ -16,3 +16,6 @@ phpAdmin: http://localhost:8081
 after creating the container, go into the apache container bash and execute the following command and restart container
 'docker-php-ext-install mysqli'
 
+## possible move_uploaded_file() error (solution for now..)
+after creating the container, go into the apache container bash and execute the following command and restart container
+'chown -R www-data:www-data /var/www/html/pic_uploads'
