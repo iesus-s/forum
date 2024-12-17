@@ -7,7 +7,7 @@ docker
 
 # instructions
 download all files in forum/ folder
-inside project foler run the following command
+inside project folder run the following command
 'docker-compose up -d'
 
 ## possible mysqli() error (solution for now..)
