@@ -1,5 +1,5 @@
 # forum
-this is a forum website with login and account creation written in php. 
+this is a simple forum website with login, account creation, messaging system, and profile pictures written in php. 
 it utilizes Docker with a compose file containing the apache web server, nginx , MySQL and phpMyAdmin.
 
 # requirements
