@@ -17,12 +17,17 @@ function validate($data) {
 // ensure the request is POST and data is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $uname = validate($_POST['username']);
+    $email = validate($_POST['email']);
     $pass = validate($_POST['password']);
     $cpass = validate($_POST['cpassword']);
 
     // validate input fields
     if (empty($uname)) {
         header("Location: ../pages/create.php?error=username is required");
+        exit();
+    }
+    if (empty($email)) {
+        header("Location: ../pages/create.php?error=email is required");
         exit();
     }
     if (empty($pass)) {
@@ -42,15 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
     // Prepare the SQL query
-    $sql = "INSERT INTO users (user_name, password) VALUES (?, ?)";
+    $sql = "INSERT INTO users (user_name, email, password) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param("ss", $uname, $hashed_pass);
+        $stmt->bind_param("sss", $uname, $email, $hashed_pass);
 
         // Execute the query and check for success
         if ($stmt->execute()) {
-            header("Location: ../index.php?success=account created!");
+            header("Location: ../index.php?success=account created!"); 
             exit();
         } 
         else {

@@ -4,9 +4,7 @@ FROM php:8.0-apache
 RUN apt-get update && apt-get install -y \
     libmariadb-dev-compat libmariadb-dev zlib1g-dev \
     && docker-php-ext-install mysqli \
-    && docker-php-ext-enable mysqli
-
-RUN docker-php-ext-install pdo_mysql
+    && docker-php-ext-enable mysqli 
 
 # Enable mod_rewrite for Apache
 RUN a2enmod rewrite
