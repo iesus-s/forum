@@ -26,5 +26,9 @@
     <form action="pages/create.php" method="get">
         <button type="submit">create account</button>
     </form> 
+    <br>
+    <form action="pages/forgot.php" method="get">
+        <button type="submit">forgot password</button>
+    </form> 
 </body>
 </html>
